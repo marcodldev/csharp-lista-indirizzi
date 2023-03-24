@@ -52,24 +52,55 @@ if (!File.Exists(pathFile))   // controlla se il file esiste già nella director
         {
             reader.ReadLine(); // legge la prima riga e la ignora, non scrive nulla perchè il writeline sta sotto
 
+
             while (!reader.EndOfStream)
             {
                 string line = reader.ReadLine();
-                var spazio = line.Split(',');
+                var pezzi = line.Split(',');
 
-
+                if (pezzi.Length == 6)
+                { 
                     var indirizzo = new Indirizzo
                     {
-                        Nome = spazio[0],
-                        Cognome = spazio[1],
-                        Via = spazio[2],
-                        Citta = spazio[3],
-                        Provincia = spazio[4],
-                        Cap = spazio[5],
-                        Altro = spazio[6],
+                        Nome = pezzi[0],
+                        Cognome = pezzi[1],
+                        Via = pezzi[2],
+                        Citta = pezzi[3],
+                        Provincia = pezzi[4],
+                        Cap = pezzi[5],
+                       
                     };
-
                     indirizzi.Add(indirizzo);
+                }
+                else if (pezzi.Length == 7)
+                {
+                    var indirizzo = new Indirizzo
+                    {
+                        Nome = pezzi[0],
+                        SecondoNome = pezzi[1],
+                        Cognome = pezzi[2],
+                        Via = pezzi[3],
+                        Citta = pezzi[4],
+                        Provincia = pezzi[5],
+                        Cap = pezzi[6],
+                       
+                    };
+                    indirizzi.Add(indirizzo);
+                }
+                else if (pezzi.Length == 4)
+                {
+                    var indirizzo = new Indirizzo
+                    {
+                        Nome = pezzi[0],                              
+                        Citta = pezzi[1],
+                        Provincia = pezzi[2],
+                        Cap = pezzi[3],
+
+
+                    };
+                    indirizzi.Add(indirizzo);
+                }
+               // indirizzi.Add(indirizzo);
                     writer.WriteLine(line);
                 
             }
@@ -78,12 +109,13 @@ if (!File.Exists(pathFile))   // controlla se il file esiste già nella director
         foreach (var indirizzo in indirizzi)
         {
             writer.WriteLine($"Nome: {indirizzo.Nome}");
+            writer.WriteLine($"Secondo Nome: {indirizzo.SecondoNome}");
             writer.WriteLine($"Cognome: {indirizzo.Cognome}");
             writer.WriteLine($"Via: {indirizzo.Via}");
             writer.WriteLine($"Città: {indirizzo.Citta}");
             writer.WriteLine($"Provincia: {indirizzo.Provincia}");
             writer.WriteLine($"Cap: {indirizzo.Cap}");
-            writer.WriteLine($"Altro: {indirizzo.Altro}");
+           
             writer.WriteLine();
         }
 
