@@ -25,7 +25,7 @@ using System.IO;
 
 
 
-//StreamReader file = File.OpenText("C:\\Users\\Marco D\\source\\repos\\csharp-lista-indirizzi\\addresses.csv"); ---> // apre, legge e chiude
+//StreamReader file = File.OpenText("..\\..\\..\\addresses.csv "); ---> // apre, legge e chiude
 
 //    while (!file.EndOfStream)
 //{
@@ -37,7 +37,7 @@ using System.IO;
 
 
 
-using var file1 = File.Open("csharp-lista-indirizzi\\bin\\Debug\\addresses.csv", FileMode.Open); // Stessa cosa di sopra, approccio diverso 
+using var file1 = File.Open("..\\..\\..\\addresses.csv ", FileMode.Open); // Stessa cosa di sopra, approccio diverso 
 
 string nomeFile = "Indirizzi.txt";
 string pathFile = Path.Combine(Directory.GetCurrentDirectory(), nomeFile); //Path.Combine -> unisce directory corrente + nome del file
@@ -46,7 +46,22 @@ if (!File.Exists(pathFile))   // controlla se il file esiste già nella director
 {
     using (StreamWriter writer = File.CreateText(pathFile))   // createtext crea un nuovo file di testo, using è utilizzato come prima, per aprire, leggere e chiudere
     {
-        writer.WriteLine("test test");
-        
+        using (StreamReader reader = new StreamReader(file1))
+        {
+            while (!reader.EndOfStream)
+            {
+                string line = reader.ReadLine();
+                writer.WriteLine(line);
+            }
+        }
+
     }
 }
+
+/*
+Altre note
+StreamWriter scrive, in questo caso ho scritto di scrivere in un nuovo file con path indicato sopra
+SteamReader legge il file che gli passiamo come parametro
+
+using si usa sempre prima di utilizzare questi metodi
+*/
