@@ -48,9 +48,11 @@ if (!File.Exists(pathFile))   // controlla se il file esiste già nella director
     {
         using (StreamReader reader = new StreamReader(file1))
         {
+            reader.ReadLine(); // legge la prima riga e la ignora, non scrive nulla perchè il writeline sta sotto
+
             while (!reader.EndOfStream)
             {
-                string line = reader.ReadLine();
+                string line = reader.ReadLine();               
                 writer.WriteLine(line);
             }
         }
