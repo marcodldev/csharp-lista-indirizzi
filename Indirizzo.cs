@@ -15,6 +15,7 @@ namespace csharp_lista_indirizzi
             public string? Citta { get; set; }
             public string? Provincia { get; set; }
             public string? Cap { get; set; }
-        
+           // public string? Altro { get; set; }
+
     }
 }

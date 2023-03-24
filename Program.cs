@@ -42,6 +42,8 @@ using var file1 = File.Open("..\\..\\..\\addresses.csv ", FileMode.Open); // Ste
 string nomeFile = "Indirizzi.txt";
 string pathFile = Path.Combine(Directory.GetCurrentDirectory(), nomeFile); //Path.Combine -> unisce directory corrente + nome del file
 
+List<Indirizzo> indirizzi = new List<Indirizzo>();  // lista di indirizzi vuota
+
 if (!File.Exists(pathFile))   // controlla se il file esiste già nella directory corrente, in modo da evitare di sovrascriverlo accidentalmente
 {
     using (StreamWriter writer = File.CreateText(pathFile))   // createtext crea un nuovo file di testo, using è utilizzato come prima, per aprire, leggere e chiudere
@@ -52,9 +54,37 @@ if (!File.Exists(pathFile))   // controlla se il file esiste già nella director
 
             while (!reader.EndOfStream)
             {
-                string line = reader.ReadLine();               
-                writer.WriteLine(line);
+                string line = reader.ReadLine();
+                var spazio = line.Split(',');
+
+
+                    var indirizzo = new Indirizzo
+                    {
+                        Nome = spazio[0],
+                        Cognome = spazio[1],
+                        Via = spazio[2],
+                        Citta = spazio[3],
+                        Provincia = spazio[4],
+                        Cap = spazio[5],
+                       
+                    };
+
+                    indirizzi.Add(indirizzo);
+                    writer.WriteLine(line);
+                
             }
+        }
+
+        foreach (var indirizzo in indirizzi)
+        {
+            writer.WriteLine($"Nome: {indirizzo.Nome}");
+            writer.WriteLine($"Cognome: {indirizzo.Cognome}");
+            writer.WriteLine($"Via: {indirizzo.Via}");
+            writer.WriteLine($"Città: {indirizzo.Citta}");
+            writer.WriteLine($"Provincia: {indirizzo.Provincia}");
+            writer.WriteLine($"Cap: {indirizzo.Cap}");
+          //  writer.WriteLine($"Altro: {indirizzo.Altro}");
+            writer.WriteLine();
         }
 
     }
