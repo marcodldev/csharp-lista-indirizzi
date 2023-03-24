@@ -66,7 +66,7 @@ if (!File.Exists(pathFile))   // controlla se il file esiste già nella director
                         Citta = spazio[3],
                         Provincia = spazio[4],
                         Cap = spazio[5],
-                       
+                        Altro = spazio[6],
                     };
 
                     indirizzi.Add(indirizzo);
@@ -83,7 +83,7 @@ if (!File.Exists(pathFile))   // controlla se il file esiste già nella director
             writer.WriteLine($"Città: {indirizzo.Citta}");
             writer.WriteLine($"Provincia: {indirizzo.Provincia}");
             writer.WriteLine($"Cap: {indirizzo.Cap}");
-          //  writer.WriteLine($"Altro: {indirizzo.Altro}");
+            writer.WriteLine($"Altro: {indirizzo.Altro}");
             writer.WriteLine();
         }
 
