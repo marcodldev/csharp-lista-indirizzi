@@ -21,15 +21,32 @@ contenuti al sul interno all’interno di una lista di oggetti istanziati a part
 
 
 using csharp_lista_indirizzi;
+using System.IO;
 
-//using var file1 = File.Open("addresses.csv", FileMode.Open); Stessa cosa di sotto, approccio diverso
 
-StreamReader file = File.OpenText("C:\\Users\\Marco D\\source\\repos\\csharp-lista-indirizzi\\addresses.csv");  // apre, legge e chiude
 
-    while (!file.EndOfStream)
+//StreamReader file = File.OpenText("C:\\Users\\Marco D\\source\\repos\\csharp-lista-indirizzi\\addresses.csv"); ---> // apre, legge e chiude
+
+//    while (!file.EndOfStream)
+//{
+//    string riga = file.ReadLine();
+//    Console.WriteLine(riga);
+//}
+
+//file.Close();
+
+
+
+using var file1 = File.Open("csharp-lista-indirizzi\\bin\\Debug\\addresses.csv", FileMode.Open); // Stessa cosa di sopra, approccio diverso 
+
+string nomeFile = "Indirizzi.txt";
+string pathFile = Path.Combine(Directory.GetCurrentDirectory(), nomeFile); //Path.Combine -> unisce directory corrente + nome del file
+
+if (!File.Exists(pathFile))   // controlla se il file esiste già nella directory corrente, in modo da evitare di sovrascriverlo accidentalmente
 {
-    string riga = file.ReadLine();
-    Console.WriteLine(riga);
+    using (StreamWriter writer = File.CreateText(pathFile))   // createtext crea un nuovo file di testo, using è utilizzato come prima, per aprire, leggere e chiudere
+    {
+        writer.WriteLine("test test");
+        
+    }
 }
-
-file.Close();
